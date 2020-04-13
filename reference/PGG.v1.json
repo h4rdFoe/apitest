@@ -7,7 +7,6 @@
   },
   "host": "127.0.0.1:3103",
   "schemes": [
-    "http",
     "https"
   ],
   "produces": [
@@ -17,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/profile": {
+    "/profiles/{id}": {
       "get": {
         "summary": "Получение профиля",
         "tags": [
@@ -34,28 +33,21 @@
           }
         },
         "operationId": "getProfile",
-        "parameters": [
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "id",
-            "description": "Уникальный идентификатор"
-          }
-        ],
+        "parameters": [],
         "description": "Получение профиля"
       },
-      "post": {
-        "summary": "Добавление профиля",
-        "operationId": "postProfile",
+      "put": {
+        "summary": "Иземенение профиля",
+        "operationId": "putProfile",
         "responses": {
-          "201": {
-            "description": "Created",
+          "204": {
+            "description": "No Content",
             "schema": {
-              "$ref": "#/definitions/profile"
+              "type": "null"
             }
           }
         },
-        "description": "Добавление профиля",
+        "description": "Изменение профиля",
         "parameters": [
           {
             "in": "body",
@@ -70,26 +62,351 @@
           "1.0"
         ]
       },
-      "put": {
-        "summary": "Иземенение профиля",
-        "operationId": "putProfile",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "Уникальный идентификатор",
+          "required": true
+        }
+      ]
+    },
+    "/vids/{id}": {
+      "get": {
+        "summary": "Получение вида",
+        "tags": [
+          "1.0"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/profile"
+              "$ref": "#/definitions/vid"
+            }
+          },
+          "": {
+            "schema": {
+              "$ref": "#/definitions/vid"
+            },
+            "description": "OK"
+          }
+        },
+        "operationId": "getVid",
+        "description": "Получение вида",
+        "parameters": []
+      },
+      "put": {
+        "summary": "Изменение вида",
+        "operationId": "putVid",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
             }
           }
         },
-        "description": "Изменение профиля",
+        "description": "Изменение вида",
+        "tags": [
+          "1.0"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            },
+            "x-examples": {},
+            "description": ""
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "x-examples": {
+              "example-1": {}
+            }
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Уникальный идентификатор"
+        }
+      ]
+    },
+    "/profiles": {
+      "get": {
+        "summary": "Получение профилей",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/profile"
+              }
+            }
+          }
+        },
+        "operationId": "getProfiles",
+        "description": "Получение профилей",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия профиля",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия профиля",
+            "format": "date"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Добавление профиля",
+        "operationId": "postProfiles",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Расположение объекта",
+                "required": true,
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Добавление профиля",
+        "tags": [
+          "1.0"
+        ],
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
               "$ref": "#/definitions/profile"
+            }
+          }
+        ]
+      }
+    },
+    "/vids": {
+      "get": {
+        "summary": "Получение видов",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/vid"
+              }
+            }
+          }
+        },
+        "operationId": "getVids",
+        "description": "Получение видов",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия вида",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия вида",
+            "format": "date"
+          },
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "profile",
+            "description": "Профиль ВМП"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Добавление вида",
+        "operationId": "postVids",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Расположение объекта",
+                "required": true,
+                "format": "uri"
+              }
+            }
+          }
+        },
+        "description": "Добавление вида",
+        "tags": [
+          "1.0"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/vid"
             },
             "description": ""
+          }
+        ]
+      }
+    },
+    "/models/{id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Уникальный идентификатор"
+        }
+      ],
+      "get": {
+        "summary": "Получение модели",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model"
+            }
+          }
+        },
+        "operationId": "getModel",
+        "description": "Получение модели",
+        "parameters": []
+      },
+      "put": {
+        "summary": "Изменение модели",
+        "operationId": "putModel",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            },
+            "headers": {}
+          }
+        },
+        "description": "Изменение модели",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/model"
+            },
+            "description": ""
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Получение моделей",
+        "responses": {},
+        "operationId": "getModels",
+        "description": "Получение моделей",
+        "parameters": [
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "vid",
+            "description": "Вид ВМП"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия модели",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dsteEnd",
+            "description": "Дата окончания действия модели",
+            "format": "date"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/model"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "post": {
+        "summary": "Добавление модели",
+        "operationId": "postModels",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Добавление модели",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/model"
+            }
           }
         ],
         "tags": [
@@ -116,7 +433,7 @@
           "type": "string",
           "description": "Код профиля"
         },
-        "profileName": {
+        "name": {
           "type": "string",
           "description": "Наименование профиля"
         },
@@ -134,11 +451,116 @@
       "required": [
         "id",
         "code",
-        "profileName",
+        "name",
         "dateBegin",
         "dateEnd"
       ]
+    },
+    "vid": {
+      "title": "vid",
+      "type": "object",
+      "description": "Вид ВМП",
+      "x-tags": [
+        "1.0"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Уникальный идентификатор"
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование вида"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код"
+        },
+        "group": {
+          "type": "integer",
+          "description": "Группа"
+        },
+        "razdel": {
+          "type": "integer",
+          "description": "Раздел ВМП"
+        },
+        "profile": {
+          "type": "integer",
+          "description": "Профиль ВМП"
+        },
+        "dateBegin": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата начала действия вида"
+        },
+        "dateEnd": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата окончания действия вида"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "code",
+        "group",
+        "razdel",
+        "profile",
+        "dateBegin",
+        "dateEnd"
+      ]
+    },
+    "model": {
+      "title": "model",
+      "type": "object",
+      "description": "Модель ВМП",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Уникальный идентификатор"
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование модели"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код"
+        },
+        "vid": {
+          "type": "integer",
+          "description": "Вид ВМП"
+        },
+        "dateBegin": {
+          "type": "string",
+          "description": "Дата начала действия модели",
+          "format": "date"
+        },
+        "dateEnd": {
+          "type": "string",
+          "description": "Дата окончания действия модели",
+          "format": "date"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "code",
+        "vid",
+        "dateBegin",
+        "dateEnd"
+      ],
+      "x-tags": [
+        "1.0"
+      ]
     }
   },
-  "securityDefinitions": {}
+  "securityDefinitions": {
+    "API Key": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "scopes": {},
+      "description": ""
+    }
+  }
 }
