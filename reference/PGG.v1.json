@@ -7,7 +7,7 @@
   },
   "host": "127.0.0.1:3103",
   "schemes": [
-    "https"
+    "http"
   ],
   "produces": [
     "application/json"
@@ -514,6 +514,9 @@
       "title": "model",
       "type": "object",
       "description": "Модель ВМП",
+      "x-tags": [
+        "1.0"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -528,8 +531,7 @@
           "description": "Код"
         },
         "vid": {
-          "type": "integer",
-          "description": "Вид ВМП"
+          "$ref": "#/definitions/vid"
         },
         "dateBegin": {
           "type": "string",
@@ -549,18 +551,36 @@
         "vid",
         "dateBegin",
         "dateEnd"
-      ],
+      ]
+    },
+    "method": {
+      "title": "method",
+      "type": "object",
       "x-tags": [
         "1.0"
-      ]
+      ],
+      "description": "Метод ВМП",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "dateBegin": {
+          "type": "string"
+        },
+        "dateEnd": {
+          "type": "string"
+        }
+      }
     }
   },
-  "securityDefinitions": {
-    "API Key": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "scopes": {},
-      "description": ""
-    }
-  }
+  "securityDefinitions": {}
 }
