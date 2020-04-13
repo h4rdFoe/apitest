@@ -19,7 +19,7 @@
   "paths": {
     "/profile": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "Получение профиля",
         "tags": [
           "1.0"
         ],
@@ -45,7 +45,7 @@
         "description": "Получение профиля"
       },
       "post": {
-        "summary": "",
+        "summary": "Добавление профиля",
         "operationId": "postProfile",
         "responses": {
           "201": {
@@ -65,10 +65,13 @@
             },
             "description": ""
           }
+        ],
+        "tags": [
+          "1.0"
         ]
       },
       "put": {
-        "summary": "",
+        "summary": "Иземенение профиля",
         "operationId": "putProfile",
         "responses": {
           "200": {
@@ -88,6 +91,9 @@
             },
             "description": ""
           }
+        ],
+        "tags": [
+          "1.0"
         ]
       }
     }
