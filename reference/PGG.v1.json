@@ -5,7 +5,7 @@
     "version": "1.0",
     "description": "Программа гос. гарантий ВМП"
   },
-  "host": "127.0.0.1:3103",
+  "host": "127.0.0.1:3100",
   "schemes": [
     "http"
   ],
@@ -378,10 +378,12 @@
             "name": "body",
             "schema": {
               "type": "array",
+              "description": "Модели",
               "items": {
                 "$ref": "#/definitions/model"
               }
-            }
+            },
+            "description": ""
           }
         ],
         "tags": [
@@ -396,6 +398,14 @@
             "description": "Created",
             "schema": {
               "type": "null"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Расположение объекта",
+                "format": "uri",
+                "required": true
+              }
             }
           }
         },
@@ -406,6 +416,125 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/model"
+            }
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/methods/{id}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение метода",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/method"
+            }
+          }
+        },
+        "operationId": "getMethod",
+        "description": "Получение метода"
+      },
+      "put": {
+        "summary": "Изменение метода",
+        "operationId": "putMethods",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Изменение метода",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/method"
+            }
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/methods": {
+      "get": {
+        "summary": "Получение методов",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/method"
+              }
+            }
+          }
+        },
+        "operationId": "getMethods",
+        "description": "Получение методов",
+        "parameters": [
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "model",
+            "description": "Модель ВМП"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия метода",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия метода",
+            "format": "date"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Добавление метода",
+        "operationId": "putMethods",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Добавление метода",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/method"
             }
           }
         ],
@@ -485,8 +614,7 @@
           "description": "Раздел ВМП"
         },
         "profile": {
-          "type": "integer",
-          "description": "Профиль ВМП"
+          "$ref": "#/definitions/profile"
         },
         "dateBegin": {
           "type": "string",
@@ -562,24 +690,37 @@
       "description": "Метод ВМП",
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Уникальный идентификатор"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Наименование метода"
         },
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "Код"
         },
         "model": {
-          "type": "string"
+          "$ref": "#/definitions/model"
         },
         "dateBegin": {
-          "type": "string"
+          "type": "string",
+          "description": "Дата начала действия метода"
         },
         "dateEnd": {
-          "type": "string"
+          "type": "string",
+          "description": "Дата окончания действия метода"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "code",
+        "model",
+        "dateBegin",
+        "dateEnd"
+      ]
     }
   },
   "securityDefinitions": {}
