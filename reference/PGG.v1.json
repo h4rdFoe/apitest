@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PGG",
+    "version": "1.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/profile": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "Уникальный идентификатор"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "Код"
+                },
+                "profileName": {
+                  "type": "string",
+                  "description": "Наименование профиля"
+                },
+                "dateBegin": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата начала действия профиля"
+                },
+                "dateEnd": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата окончания действия профиля"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "operationId": "get-profile",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dateBegin": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата начала действия профиля"
+                },
+                "dateEnd": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "Дата окончания действия профиля"
+                }
+              },
+              "required": [
+                "dateBegin",
+                "dateEnd"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {}
+}
