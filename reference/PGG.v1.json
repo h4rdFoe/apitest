@@ -542,6 +542,127 @@
           "1.0"
         ]
       }
+    },
+    "/typeOfTreatments/{id}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение вида лечения",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            }
+          }
+        },
+        "operationId": "getTypeOfTreatment",
+        "description": "Получение вида лечения"
+      },
+      "put": {
+        "summary": "Изменение вида лечения",
+        "operationId": "putTypeOfTreatment",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Изменение вида лечения",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            }
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/typeOfTreatments": {
+      "get": {
+        "summary": "Получение видов лечения",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {},
+        "operationId": "getTypeOfTreatments",
+        "description": "Получение видов лечения",
+        "parameters": [
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "model",
+            "description": "Модель ВМП"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия вида лечения",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия вида лечения",
+            "format": "date"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/typeOfTreatment"
+              }
+            }
+          }
+        ]
+      },
+      "parameters": [],
+      "post": {
+        "summary": "Добавление вида лечения",
+        "operationId": "postTypeOfTreatments",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "tags": [
+          "1.0"
+        ],
+        "description": "Добавление вида лечения",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            },
+            "description": ""
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -720,6 +841,43 @@
         "model",
         "dateBegin",
         "dateEnd"
+      ]
+    },
+    "typeOfTreatment": {
+      "title": "typeOfTreatment",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Уникальный идентификатор"
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование вида лечения"
+        },
+        "model": {
+          "$ref": "#/definitions/model"
+        },
+        "dateBegin": {
+          "type": "string",
+          "description": "Дата начала действия вида лечения",
+          "format": "date"
+        },
+        "dateEnd": {
+          "type": "string",
+          "description": "Дата окончания действия вида лечения",
+          "format": "date"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "model",
+        "dateBegin",
+        "dateEnd"
+      ],
+      "x-tags": [
+        "1.0"
       ]
     }
   },
