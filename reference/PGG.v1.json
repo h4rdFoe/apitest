@@ -2,11 +2,13 @@
   "swagger": "2.0",
   "info": {
     "title": "PGG",
-    "version": "1.0"
+    "version": "1.0",
+    "description": "Программа гос. гарантий ВМП"
   },
-  "host": "localhost:3000",
+  "host": "127.0.0.1:3103",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "produces": [
     "application/json"
@@ -18,70 +20,119 @@
     "/profile": {
       "get": {
         "summary": "Your GET endpoint",
-        "tags": [],
+        "tags": [
+          "1.0"
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer",
-                  "description": "Уникальный идентификатор"
-                },
-                "code": {
-                  "type": "string",
-                  "description": "Код"
-                },
-                "profileName": {
-                  "type": "string",
-                  "description": "Наименование профиля"
-                },
-                "dateBegin": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Дата начала действия профиля"
-                },
-                "dateEnd": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Дата окончания действия профиля"
-                }
-              },
-              "required": [
-                "id"
-              ]
+              "$ref": "#/definitions/profile"
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "operationId": "getProfile",
+        "parameters": [
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "id",
+            "description": "Уникальный идентификатор"
+          }
+        ],
+        "description": "Получение профиля"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "postProfile",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/profile"
             }
           }
         },
-        "operationId": "get-profile",
+        "description": "Добавление профиля",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "dateBegin": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Дата начала действия профиля"
-                },
-                "dateEnd": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "Дата окончания действия профиля"
-                }
-              },
-              "required": [
-                "dateBegin",
-                "dateEnd"
-              ]
+              "$ref": "#/definitions/profile"
+            },
+            "description": ""
+          }
+        ]
+      },
+      "put": {
+        "summary": "",
+        "operationId": "putProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/profile"
             }
+          }
+        },
+        "description": "Изменение профиля",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/profile"
+            },
+            "description": ""
           }
         ]
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "profile": {
+      "title": "profile",
+      "type": "object",
+      "description": "Профиль ВМП",
+      "x-examples": {},
+      "x-tags": [
+        "1.0"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Уникальный идентификатор"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код профиля"
+        },
+        "profileName": {
+          "type": "string",
+          "description": "Наименование профиля"
+        },
+        "dateBegin": {
+          "type": "string",
+          "description": "Дата начала действия профиля",
+          "format": "date"
+        },
+        "dateEnd": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата окончания действия профиля"
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "profileName",
+        "dateBegin",
+        "dateEnd"
+      ]
+    }
+  },
+  "securityDefinitions": {}
 }
