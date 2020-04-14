@@ -139,8 +139,8 @@
           "type": "integer",
           "name": "id",
           "in": "path",
-          "required": true,
-          "description": "Уникальный идентификатор"
+          "description": "Уникальный идентификатор",
+          "required": true
         }
       ]
     },
@@ -349,7 +349,17 @@
     "/models": {
       "get": {
         "summary": "Получение моделей",
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/model"
+              }
+            }
+          }
+        },
         "operationId": "getModels",
         "description": "Получение моделей",
         "parameters": [
@@ -372,18 +382,6 @@
             "name": "dsteEnd",
             "description": "Дата окончания действия модели",
             "format": "date"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "type": "array",
-              "description": "Модели",
-              "items": {
-                "$ref": "#/definitions/model"
-              }
-            },
-            "description": ""
           }
         ],
         "tags": [
@@ -517,9 +515,9 @@
           }
         ]
       },
-      "put": {
+      "post": {
         "summary": "Добавление метода",
-        "operationId": "putMethods",
+        "operationId": "postMethods",
         "responses": {
           "201": {
             "description": "Created",
@@ -528,6 +526,9 @@
             }
           }
         },
+        "tags": [
+          "1.0"
+        ],
         "description": "Добавление метода",
         "parameters": [
           {
@@ -537,9 +538,6 @@
               "$ref": "#/definitions/method"
             }
           }
-        ],
-        "tags": [
-          "1.0"
         ]
       }
     },
@@ -600,7 +598,17 @@
         "tags": [
           "1.0"
         ],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/typeOfTreatment"
+              }
+            }
+          }
+        },
         "operationId": "getTypeOfTreatments",
         "description": "Получение видов лечения",
         "parameters": [
@@ -623,16 +631,6 @@
             "name": "dateEnd",
             "description": "Дата окончания действия вида лечения",
             "format": "date"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/typeOfTreatment"
-              }
-            }
           }
         ]
       },
@@ -661,6 +659,124 @@
             },
             "description": ""
           }
+        ]
+      }
+    },
+    "/mkb10/{id}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение МКБ-10",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            }
+          }
+        },
+        "operationId": "getMkb10",
+        "description": "Получение МКБ-10"
+      },
+      "put": {
+        "summary": "Изменение МКБ-10",
+        "operationId": "putMkb10",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Изменение МКБ-10",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            }
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/mkbs-10": {
+      "get": {
+        "summary": "Получение МКБ-10",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/mkb10"
+              }
+            }
+          }
+        },
+        "operationId": "getMkbs-10",
+        "description": "Получение МКБ-10",
+        "parameters": [
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "model",
+            "description": "Модель ВМП"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия заболевания"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия заболевания"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Добавление МКБ-10",
+        "operationId": "postMkbs-10",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Добавление МКБ-10",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            },
+            "description": ""
+          }
+        ],
+        "tags": [
+          "1.0"
         ]
       }
     }
@@ -875,6 +991,47 @@
         "model",
         "dateBegin",
         "dateEnd"
+      ],
+      "x-tags": [
+        "1.0"
+      ]
+    },
+    "mkb10": {
+      "title": "mkb10",
+      "type": "object",
+      "description": "МКБ-10",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Уникальный идентификатор"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код"
+        },
+        "name": {
+          "type": "string",
+          "description": "Наименование"
+        },
+        "model": {
+          "$ref": "#/definitions/model"
+        },
+        "dateBegin": {
+          "type": "string",
+          "description": "Дата начала действия заболевания",
+          "format": "date"
+        },
+        "dateEnd": {
+          "type": "string",
+          "description": "Дата окончания действия заболевания",
+          "format": "date"
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "name",
+        "model"
       ],
       "x-tags": [
         "1.0"
