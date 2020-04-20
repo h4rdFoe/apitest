@@ -779,6 +779,42 @@
           "1.0"
         ]
       }
+    },
+    "/pggFile": {
+      "post": {
+        "summary": "Загрузка ПГГ с помощью xlsx",
+        "operationId": "postPggFile",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "null"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Загрузка ПГГ с помощью xlsx",
+        "parameters": [
+          {
+            "in": "formData",
+            "type": "file",
+            "name": "file",
+            "description": "Файл с ПГГ",
+            "required": true
+          }
+        ]
+      }
     }
   },
   "definitions": {
