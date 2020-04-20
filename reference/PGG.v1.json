@@ -813,6 +813,9 @@
             "description": "Файл с ПГГ",
             "required": true
           }
+        ],
+        "tags": [
+          "1.0"
         ]
       }
     }
