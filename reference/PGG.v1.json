@@ -834,6 +834,57 @@
           "1.0"
         ]
       }
+    },
+    "/allMkb-10": {
+      "get": {
+        "summary": "Получение всех МКБ-10",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "Уникальный идентификатор"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "Код МКБ"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Наименование МКБ"
+                }
+              },
+              "required": [
+                "id",
+                "code",
+                "name"
+              ]
+            }
+          }
+        },
+        "operationId": "getAllMkb-10",
+        "description": "Получение всех МКБ-10",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "code",
+            "description": "Код"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "name",
+            "description": "Наименование"
+          }
+        ]
+      }
     }
   },
   "definitions": {
