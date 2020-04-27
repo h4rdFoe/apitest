@@ -870,8 +870,6 @@
         }
       },
       "required": [
-        "id",
-        "code",
         "name",
         "dateBegin",
         "dateEnd"
@@ -920,9 +918,7 @@
         }
       },
       "required": [
-        "id",
         "name",
-        "code",
         "group",
         "razdel",
         "profile",
@@ -965,9 +961,7 @@
         }
       },
       "required": [
-        "id",
         "name",
-        "code",
         "vid",
         "dateBegin",
         "dateEnd"
@@ -1006,9 +1000,7 @@
         }
       },
       "required": [
-        "id",
         "name",
-        "code",
         "model",
         "dateBegin",
         "dateEnd"
@@ -1017,6 +1009,9 @@
     "typeOfTreatment": {
       "title": "typeOfTreatment",
       "type": "object",
+      "x-tags": [
+        "1.0"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -1041,14 +1036,10 @@
         }
       },
       "required": [
-        "id",
         "name",
         "model",
         "dateBegin",
         "dateEnd"
-      ],
-      "x-tags": [
-        "1.0"
       ]
     },
     "mkb10": {
