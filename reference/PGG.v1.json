@@ -812,6 +812,22 @@
             "name": "file",
             "description": "Файл с ПГГ",
             "required": true
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "dateBegin",
+            "description": "Дата начала срока действия",
+            "required": true,
+            "format": "date"
+          },
+          {
+            "in": "formData",
+            "type": "string",
+            "name": "dateEnd",
+            "description": "Дата окончания срока действия",
+            "required": true,
+            "format": "date"
           }
         ],
         "tags": [
