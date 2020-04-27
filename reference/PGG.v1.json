@@ -915,6 +915,10 @@
           "type": "string",
           "format": "date",
           "description": "Дата окончания действия вида"
+        },
+        "price": {
+          "type": "integer",
+          "description": "Цена"
         }
       },
       "required": [
@@ -923,7 +927,8 @@
         "razdel",
         "profile",
         "dateBegin",
-        "dateEnd"
+        "dateEnd",
+        "price"
       ]
     },
     "model": {
