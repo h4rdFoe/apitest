@@ -47,7 +47,7 @@
             }
           }
         },
-        "description": "Изменение профиля",
+        "description": "Изменение профиля. Валидации при изменении записей: 1.Формат кода ХХ, Х - цифры от 0 до 9; 2.Нельзя менять идентификатор",
         "parameters": [
           {
             "in": "body",
@@ -123,7 +123,7 @@
             }
           }
         },
-        "description": "Изменение вида",
+        "description": "Изменение вида. Валидации при изменении записей: 1.Уникальность кода в рамках родителя и года; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Раздел принимает значения только 0/1; 5.Профиль - существующие профили",
         "tags": [
           "1.0"
         ],
@@ -231,7 +231,7 @@
             }
           }
         },
-        "description": "Добавление профиля",
+        "description": "Добавление профиля. Валидации при создании записей: 1.Логика формирования кода, описанная в постановке; 2.Идентификатор - автоинкремент",
         "tags": [
           "1.0"
         ],
@@ -307,7 +307,7 @@
             }
           }
         },
-        "description": "Добавление вида",
+        "description": "Добавление вида. Валидации при создании записей: 1.Уникальность кода в рамках родителя и года; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Раздел принимает значения только 0/1; 5.Профиль - существующие профили",
         "tags": [
           "1.0"
         ],
@@ -362,7 +362,7 @@
             "headers": {}
           }
         },
-        "description": "Изменение модели",
+        "description": "Изменение модели. Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Вид - существующие виды",
         "parameters": [
           {
             "in": "body",
@@ -455,7 +455,7 @@
             }
           }
         },
-        "description": "Добавление модели",
+        "description": "Добавление модели. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Вид - существующие виды",
         "parameters": [
           {
             "in": "body",
@@ -506,7 +506,7 @@
             }
           }
         },
-        "description": "Изменение метода",
+        "description": "Изменение метода. Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -593,7 +593,7 @@
         "tags": [
           "1.0"
         ],
-        "description": "Добавление метода",
+        "description": "Добавление метода. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Нельзя менять идентификатор; 5.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -641,7 +641,7 @@
             }
           }
         },
-        "description": "Изменение вида лечения",
+        "description": "Изменение вида лечения. Валидации при изменении записей: 1.Уникальность кода в рамках родителяж 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -729,7 +729,7 @@
         "tags": [
           "1.0"
         ],
-        "description": "Добавление вида лечения",
+        "description": "Добавление вида лечения. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -778,7 +778,7 @@
             }
           }
         },
-        "description": "Изменение МКБ-10",
+        "description": "Изменение МКБ-10. Валидации при изменении записей: 1.Можно менять только модель, дата начала, дата окончания; 2.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -860,7 +860,7 @@
             }
           }
         },
-        "description": "Добавление МКБ-10",
+        "description": "Добавление МКБ-10. Валидации при создании записей: 1.Идентификатор - идентификаторы из mz_nsi_directory.ref_mkb_10; 2.Модель - существующие модели",
         "parameters": [
           {
             "in": "body",
@@ -900,7 +900,7 @@
             }
           }
         },
-        "description": "Загрузка ПГГ с помощью xlsx",
+        "description": "Загрузка ПГГ с помощью xlsx; Логика в постановке",
         "parameters": [
           {
             "in": "formData",
@@ -965,7 +965,7 @@
           }
         },
         "operationId": "getAllMkb-10",
-        "description": "Получение всех МКБ-10",
+        "description": "Получение всех МКБ-10\nПараметры выборки:\n  1.nsi_is_actual = 1\n  2.actual = 1",
         "parameters": [
           {
             "type": "string",
@@ -987,7 +987,7 @@
     "profile": {
       "title": "profile",
       "type": "object",
-      "description": "Профиль ВМП",
+      "description": "Профиль ВМП; id:ref_profile.id; code:ref_profile.code; name:ref_profile.profile_descr; dateBegin:ref_profile.date_begin; dateEnd:ref_profile.date_end",
       "x-examples": {},
       "x-tags": [
         "1.0"
@@ -1025,7 +1025,7 @@
     "vid": {
       "title": "vid",
       "type": "object",
-      "description": "Вид ВМП",
+      "description": "Вид ВМП; id:ref_vid.id; name:ref_vid.s_name; code:ref_vid.s_code; group:ref_vid.id_group; razdel:ref_vid.id_razdel; profile:модель profile,ref_vid.id_profile; dateBegin:ref_vid.date_begin; dateEnd:ref_vid.date_end",
       "x-tags": [
         "1.0"
       ],
@@ -1081,7 +1081,7 @@
     "model": {
       "title": "model",
       "type": "object",
-      "description": "Модель ВМП",
+      "description": "Модель ВМП; id:ref_model.id; name:ref_model.s_name; code:ref_model.s_code; vid:модель vid,ref_model.id_vid; dateBegin:ref_model.date_begin; dateEnd:ref_model.date_end",
       "x-tags": [
         "1.0"
       ],
@@ -1125,7 +1125,7 @@
       "x-tags": [
         "1.0"
       ],
-      "description": "Метод ВМП",
+      "description": "Метод ВМП; id:ref_method.id; name:ref_method.s_name; code:ref_method.s_code; model:модель model,\nref_method.id_model; dateBegin:ref_method.date_begin; dateEnd:ref_method.date_end",
       "properties": {
         "id": {
           "type": "integer",
@@ -1192,12 +1192,13 @@
         "model",
         "dateBegin",
         "dateEnd"
-      ]
+      ],
+      "description": "Вид лечения; id:ref_vid_lechen.id; name:ref_vid_lechen.s_name; model:модель model, ref_vid_lechen.id_model; dateBegin:ref_vid_lechen.date_begin; dateEnd:ref_vid_lechen.date_end"
     },
     "mkb10": {
       "title": "mkb10",
       "type": "object",
-      "description": "МКБ-10",
+      "description": "МКБ-10; id:mz_nsi_directory.ref_mkb_10.id; code:mz_nsi_directory.ref_mkb_10.mkb_code; name:mz_nsi_directory.ref_mkb_10.mkb_name; model:модель model, link_mkb_10.id_model; dateBegin:link_mkb_10.date_begin; dateEnd:link_mkb_10.date_end",
       "properties": {
         "id": {
           "type": "integer",
