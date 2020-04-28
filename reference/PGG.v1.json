@@ -70,7 +70,23 @@
           "description": "Уникальный идентификатор",
           "required": true
         }
-      ]
+      ],
+      "delete": {
+        "summary": "Удаление профиля",
+        "operationId": "deleteProfiles",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление профиля",
+        "tags": [
+          "1.0"
+        ]
+      }
     },
     "/vids/{id}": {
       "get": {
@@ -142,7 +158,23 @@
           "description": "Уникальный идентификатор",
           "required": true
         }
-      ]
+      ],
+      "delete": {
+        "summary": "Удаление вида",
+        "operationId": "deleteVids",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "tags": [
+          "1.0"
+        ],
+        "description": "Удаление вида"
+      }
     },
     "/profiles": {
       "get": {
@@ -344,6 +376,22 @@
         "tags": [
           "1.0"
         ]
+      },
+      "delete": {
+        "summary": "Удаление модели",
+        "operationId": "deleteModels",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление модели",
+        "tags": [
+          "1.0"
+        ]
       }
     },
     "/models": {
@@ -471,6 +519,22 @@
         "tags": [
           "1.0"
         ]
+      },
+      "delete": {
+        "summary": "Удаление метода",
+        "operationId": "deleteMethods",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "tags": [
+          "1.0"
+        ],
+        "description": "Удаление метода"
       }
     },
     "/methods": {
@@ -590,6 +654,22 @@
         "tags": [
           "1.0"
         ]
+      },
+      "delete": {
+        "summary": "Удаление вида лечения",
+        "operationId": "deleteTypeOfTreatments",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "tags": [
+          "1.0"
+        ],
+        "description": "Удаление вида лечения"
       }
     },
     "/typeOfTreatments": {
@@ -708,6 +788,22 @@
             }
           }
         ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление связи с МКБ",
+        "operationId": "deleteMkb10",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление связи с МКБ",
         "tags": [
           "1.0"
         ]
