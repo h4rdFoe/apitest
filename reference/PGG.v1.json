@@ -40,14 +40,14 @@
         "summary": "Иземенение профиля",
         "operationId": "putProfile",
         "responses": {
-          "204": {
-            "description": "No Content",
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "null"
+              "$ref": "#/definitions/profile"
             }
           }
         },
-        "description": "Изменение профиля. Валидации при изменении записей: 1.Формат кода ХХ, Х - цифры от 0 до 9; 2.Нельзя менять идентификатор",
+        "description": "Изменение профиля",
         "parameters": [
           {
             "in": "body",
@@ -55,7 +55,7 @@
             "schema": {
               "$ref": "#/definitions/profile"
             },
-            "description": ""
+            "description": "Валидации при изменении записей: 1.Формат кода ХХ, Х - цифры от 0 до 9; 2.Нельзя менять идентификатор"
           }
         ],
         "tags": [
@@ -86,94 +86,6 @@
         "tags": [
           "1.0"
         ]
-      }
-    },
-    "/vids/{id}": {
-      "get": {
-        "summary": "Получение вида",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/vid"
-            }
-          },
-          "": {
-            "schema": {
-              "$ref": "#/definitions/vid"
-            },
-            "description": "OK"
-          }
-        },
-        "operationId": "getVid",
-        "description": "Получение вида",
-        "parameters": []
-      },
-      "put": {
-        "summary": "Изменение вида",
-        "operationId": "putVid",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Изменение вида. Валидации при изменении записей: 1.Уникальность кода в рамках родителя и года; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Раздел принимает значения только 0/1; 5.Профиль - существующие профили",
-        "tags": [
-          "1.0"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/vid"
-            },
-            "x-examples": {},
-            "description": ""
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            },
-            "x-examples": {
-              "example-1": {}
-            }
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "type": "integer",
-          "name": "id",
-          "in": "path",
-          "description": "Уникальный идентификатор",
-          "required": true
-        }
-      ],
-      "delete": {
-        "summary": "Удаление вида",
-        "operationId": "deleteVids",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "tags": [
-          "1.0"
-        ],
-        "description": "Удаление вида"
       }
     },
     "/profiles": {
@@ -218,20 +130,13 @@
         "responses": {
           "201": {
             "description": "Created",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Расположение объекта",
-                "required": true,
-                "format": "uri"
-              }
-            },
+            "headers": {},
             "schema": {
-              "type": "null"
+              "$ref": "#/definitions/profile"
             }
           }
         },
-        "description": "Добавление профиля. Валидации при создании записей: 1.Логика формирования кода, описанная в постановке; 2.Идентификатор - автоинкремент",
+        "description": "Добавление профиля",
         "tags": [
           "1.0"
         ],
@@ -241,640 +146,12 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/profile"
-            }
-          }
-        ]
-      }
-    },
-    "/vids": {
-      "get": {
-        "summary": "Получение видов",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/vid"
-              }
-            }
-          }
-        },
-        "operationId": "getVids",
-        "description": "Получение видов",
-        "parameters": [
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия вида",
-            "format": "date"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateEnd",
-            "description": "Дата окончания действия вида",
-            "format": "date"
-          },
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "profile",
-            "description": "Профиль ВМП"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Добавление вида",
-        "operationId": "postVids",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "null"
             },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Расположение объекта",
-                "required": true,
-                "format": "uri"
-              }
-            }
-          }
-        },
-        "description": "Добавление вида. Валидации при создании записей: 1.Уникальность кода в рамках родителя и года; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Раздел принимает значения только 0/1; 5.Профиль - существующие профили",
-        "tags": [
-          "1.0"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/vid"
-            },
-            "description": ""
-          }
-        ]
-      }
-    },
-    "/models/{id}": {
-      "parameters": [
-        {
-          "type": "integer",
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Уникальный идентификатор"
-        }
-      ],
-      "get": {
-        "summary": "Получение модели",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/model"
-            }
-          }
-        },
-        "operationId": "getModel",
-        "description": "Получение модели",
-        "parameters": []
-      },
-      "put": {
-        "summary": "Изменение модели",
-        "operationId": "putModel",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            },
-            "headers": {}
-          }
-        },
-        "description": "Изменение модели. Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Вид - существующие виды",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/model"
-            },
-            "description": ""
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление модели",
-        "operationId": "deleteModels",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Удаление модели",
-        "tags": [
-          "1.0"
-        ]
-      }
-    },
-    "/models": {
-      "get": {
-        "summary": "Получение моделей",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/model"
-              }
-            }
-          }
-        },
-        "operationId": "getModels",
-        "description": "Получение моделей",
-        "parameters": [
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "vid",
-            "description": "Вид ВМП"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия модели",
-            "format": "date"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dsteEnd",
-            "description": "Дата окончания действия модели",
-            "format": "date"
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "post": {
-        "summary": "Добавление модели",
-        "operationId": "postModels",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "null"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Расположение объекта",
-                "format": "uri",
-                "required": true
-              }
-            }
-          }
-        },
-        "description": "Добавление модели. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Вид - существующие виды",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/model"
-            }
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      }
-    },
-    "/methods/{id}": {
-      "parameters": [
-        {
-          "type": "string",
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Получение метода",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/method"
-            }
-          }
-        },
-        "operationId": "getMethod",
-        "description": "Получение метода"
-      },
-      "put": {
-        "summary": "Изменение метода",
-        "operationId": "putMethods",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Изменение метода. Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/method"
-            }
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление метода",
-        "operationId": "deleteMethods",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "tags": [
-          "1.0"
-        ],
-        "description": "Удаление метода"
-      }
-    },
-    "/methods": {
-      "get": {
-        "summary": "Получение методов",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/method"
-              }
-            }
-          }
-        },
-        "operationId": "getMethods",
-        "description": "Получение методов",
-        "parameters": [
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "model",
-            "description": "Модель ВМП"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия метода",
-            "format": "date"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateEnd",
-            "description": "Дата окончания действия метода",
-            "format": "date"
+            "description": "Валидации при создании записей: 1.Логика формирования кода, описанная в постановке; 2.Идентификатор - автоинкремент"
           }
         ]
       },
-      "post": {
-        "summary": "Добавление метода",
-        "operationId": "postMethods",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "tags": [
-          "1.0"
-        ],
-        "description": "Добавление метода. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Нельзя менять идентификатор; 5.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/method"
-            }
-          }
-        ]
-      }
-    },
-    "/typeOfTreatments/{id}": {
-      "parameters": [
-        {
-          "type": "string",
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Получение вида лечения",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            }
-          }
-        },
-        "operationId": "getTypeOfTreatment",
-        "description": "Получение вида лечения"
-      },
-      "put": {
-        "summary": "Изменение вида лечения",
-        "operationId": "putTypeOfTreatment",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Изменение вида лечения. Валидации при изменении записей: 1.Уникальность кода в рамках родителяж 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            }
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление вида лечения",
-        "operationId": "deleteTypeOfTreatments",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "tags": [
-          "1.0"
-        ],
-        "description": "Удаление вида лечения"
-      }
-    },
-    "/typeOfTreatments": {
-      "get": {
-        "summary": "Получение видов лечения",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/typeOfTreatment"
-              }
-            }
-          }
-        },
-        "operationId": "getTypeOfTreatments",
-        "description": "Получение видов лечения",
-        "parameters": [
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "model",
-            "description": "Модель ВМП"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия вида лечения",
-            "format": "date"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateEnd",
-            "description": "Дата окончания действия вида лечения",
-            "format": "date"
-          }
-        ]
-      },
-      "parameters": [],
-      "post": {
-        "summary": "Добавление вида лечения",
-        "operationId": "postTypeOfTreatments",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "tags": [
-          "1.0"
-        ],
-        "description": "Добавление вида лечения. Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            },
-            "description": ""
-          }
-        ]
-      }
-    },
-    "/mkb10/{id}": {
-      "parameters": [
-        {
-          "type": "string",
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Получение МКБ-10",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mkb10"
-            }
-          }
-        },
-        "operationId": "getMkb10",
-        "description": "Получение МКБ-10"
-      },
-      "put": {
-        "summary": "Изменение МКБ-10",
-        "operationId": "putMkb10",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Изменение МКБ-10. Валидации при изменении записей: 1.Можно менять только модель, дата начала, дата окончания; 2.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/mkb10"
-            }
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление связи с МКБ",
-        "operationId": "deleteMkb10",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Удаление связи с МКБ",
-        "tags": [
-          "1.0"
-        ]
-      }
-    },
-    "/mkbs-10": {
-      "get": {
-        "summary": "Получение МКБ-10",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/mkb10"
-              }
-            }
-          }
-        },
-        "operationId": "getMkbs-10",
-        "description": "Получение МКБ-10",
-        "parameters": [
-          {
-            "type": "integer",
-            "in": "query",
-            "name": "model",
-            "description": "Модель ВМП"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия заболевания"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateEnd",
-            "description": "Дата окончания действия заболевания"
-          }
-        ]
-      },
-      "post": {
-        "summary": "Добавление МКБ-10",
-        "operationId": "postMkbs-10",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Добавление МКБ-10. Валидации при создании записей: 1.Идентификатор - идентификаторы из mz_nsi_directory.ref_mkb_10; 2.Модель - существующие модели",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/mkb10"
-            },
-            "description": ""
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      }
+      "parameters": []
     },
     "/pggFile": {
       "post": {
@@ -981,6 +258,813 @@
           }
         ]
       }
+    },
+    "/profiles/{profile_id}/vids": {
+      "get": {
+        "summary": "Получение видов",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/vid"
+              }
+            }
+          }
+        },
+        "operationId": "get-profiles-id-vids",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия вида",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия вида",
+            "format": "date"
+          }
+        ],
+        "description": "Получение видов"
+      },
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Добавление вида",
+        "operationId": "post-profiles-profile_id-vids",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            }
+          }
+        },
+        "description": "Добавление вида",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            },
+            "description": "Валидации при создании записей: 1.Уникальность кода в рамках родителя и года; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Раздел принимает значения только 0/1"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение вида",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id",
+        "description": "Получение вида"
+      },
+      "put": {
+        "summary": "Изменение вида",
+        "operationId": "put-profiles-profile_id-vids-vid_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            }
+          }
+        },
+        "description": "Изменение вида",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/vid"
+            },
+            "description": "Валидации при изменении записей: 1.Уникальность кода в рамках родителя и года; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор; 4.Раздел принимает значения только 0/1"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление вида",
+        "operationId": "delete-profiles-profile_id-vids-vid_id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление вида",
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение моделей",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/model"
+              }
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия модели",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dsteEnd",
+            "description": "Дата окончания действия модели",
+            "format": "date"
+          }
+        ],
+        "description": "Получение модели"
+      },
+      "post": {
+        "summary": "Добавление модели",
+        "operationId": "post-profiles-profile_id-vids-vid_id-models",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/model"
+            }
+          }
+        },
+        "description": "Добавление модели",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/model"
+            },
+            "description": "Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение модели",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model"
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id",
+        "description": "Получение модели"
+      },
+      "put": {
+        "summary": "Изменение модели",
+        "operationId": "put-profiles-profile_id-vids-vid_id-models-model_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model"
+            }
+          }
+        },
+        "description": "Изменение модели",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/model"
+            },
+            "description": "Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление модели",
+        "operationId": "delete-profiles-profile_id-vids-vid_id-models-model_id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление модели",
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/methods": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение методов",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/method"
+              }
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-methods",
+        "description": "Получение методов",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия метода",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия метода",
+            "format": "date"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Добавление метода",
+        "operationId": "post-profiles-profile_id-vids-vid_id-models-model_id-methods",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/method"
+            }
+          }
+        },
+        "description": "Добавление метода",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/method"
+            },
+            "description": "Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент; 4.Нельзя менять идентификатор"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/methods/{method_id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "method_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение метода",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/method"
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-methods-method_id",
+        "description": "Получение метода"
+      },
+      "put": {
+        "summary": "Изменение метода",
+        "operationId": "put-profiles-profile_id-vids-vid_id-models-model_id-methods-method_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/method"
+            }
+          }
+        },
+        "description": "Изменение метода",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/method"
+            },
+            "description": "Валидации при изменении записей: 1.Уникальность кода в рамках родителя; 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление метода",
+        "operationId": "delete-profiles-profile_id-vids-vid_id-models-model_id-methods-method_id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление метода",
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/typeOfTreatments": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение видов лечения",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/typeOfTreatment"
+              }
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия вида лечения",
+            "format": "date"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия вида лечения",
+            "format": "date"
+          }
+        ],
+        "description": "Получение видов лечения"
+      },
+      "post": {
+        "summary": "Добавление видов лечения",
+        "operationId": "post-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            }
+          }
+        },
+        "description": "Добавление видов лечения",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            },
+            "description": "Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/typeOfTreatments/{type_id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "type_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение вида лечения",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
+        "description": "Получение вида лечения"
+      },
+      "put": {
+        "summary": "Изменение вида лечения",
+        "operationId": "put-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            }
+          }
+        },
+        "description": "Изменение вида лечения",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/typeOfTreatment"
+            },
+            "description": "Валидации при изменении записей: 1.Уникальность кода в рамках родителяж 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление вида лечения",
+        "operationId": "delete-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление вида лечения",
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/mkb10": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение МКБ-10",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/mkb10"
+              }
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-mkb10",
+        "description": "Получение МКБ-10",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateBegin",
+            "description": "Дата начала действия заболевания"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "dateEnd",
+            "description": "Дата окончания действия заболевания"
+          }
+        ]
+      },
+      "post": {
+        "summary": "Добавление связки с МКБ-10",
+        "operationId": "post-profiles-profile_id-vids-vid_id-models-model_id-mkb10",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            }
+          }
+        },
+        "description": "Добавление связки с МКБ-10",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            },
+            "description": "Валидации при создании записей: 1.Идентификатор - идентификаторы из mz_nsi_directory.ref_mkb_10"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      }
+    },
+    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/mkb10/{mkb_id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "name": "profile_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "vid_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "model_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "type": "integer",
+          "name": "mkb_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Получение МКБ-10",
+        "tags": [
+          "1.0"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            }
+          }
+        },
+        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-mkb10-mkb_id",
+        "description": "Получение МКБ-10"
+      },
+      "put": {
+        "summary": "Изменение связи с МКБ-10",
+        "operationId": "put-profiles-profile_id-vids-vid_id-models-model_id-mkb10-mkb_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            }
+          }
+        },
+        "description": "Изменение связи с МКБ-10",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/mkb10"
+            },
+            "description": "Валидации при изменении записей: 1.Можно менять только модель, дата начала, дата окончания"
+          }
+        ],
+        "tags": [
+          "1.0"
+        ]
+      },
+      "delete": {
+        "summary": "Удаление связи с МКБ-10",
+        "operationId": "delete-profiles-profile_id-vids-vid_id-models-model_id-mkb10-mkb_id",
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "null"
+            }
+          }
+        },
+        "description": "Удаление связи с МКБ-10",
+        "tags": [
+          "1.0"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1061,9 +1145,6 @@
           "type": "integer",
           "description": "Раздел ВМП"
         },
-        "profile": {
-          "$ref": "#/definitions/profile"
-        },
         "dateBegin": {
           "type": "string",
           "format": "date",
@@ -1091,7 +1172,6 @@
         "name",
         "group",
         "razdel",
-        "profile",
         "dateBegin",
         "dateEnd",
         "price"
@@ -1116,9 +1196,6 @@
         "code": {
           "type": "string",
           "description": "Код"
-        },
-        "vid": {
-          "$ref": "#/definitions/vid"
         },
         "dateBegin": {
           "type": "string",
@@ -1169,7 +1246,6 @@
       },
       "required": [
         "name",
-        "vid",
         "dateBegin",
         "dateEnd"
       ]
@@ -1194,9 +1270,6 @@
           "type": "string",
           "description": "Код"
         },
-        "model": {
-          "$ref": "#/definitions/model"
-        },
         "dateBegin": {
           "type": "string",
           "description": "Дата начала действия метода"
@@ -1208,7 +1281,6 @@
       },
       "required": [
         "name",
-        "model",
         "dateBegin",
         "dateEnd"
       ]
@@ -1229,9 +1301,6 @@
           "type": "string",
           "description": "Наименование вида лечения"
         },
-        "model": {
-          "$ref": "#/definitions/model"
-        },
         "dateBegin": {
           "type": "string",
           "description": "Дата начала действия вида лечения",
@@ -1245,7 +1314,6 @@
       },
       "required": [
         "name",
-        "model",
         "dateBegin",
         "dateEnd"
       ]
@@ -1254,6 +1322,9 @@
       "title": "mkb10",
       "type": "object",
       "description": "МКБ-10; id:mz_nsi_directory.ref_mkb_10.id; code:mz_nsi_directory.ref_mkb_10.mkb_code; name:mz_nsi_directory.ref_mkb_10.mkb_name; model:модель model, link_mkb_10.id_model; dateBegin:link_mkb_10.date_begin; dateEnd:link_mkb_10.date_end",
+      "x-tags": [
+        "1.0"
+      ],
       "properties": {
         "id": {
           "type": "integer",
@@ -1266,9 +1337,6 @@
         "name": {
           "type": "string",
           "description": "Наименование"
-        },
-        "model": {
-          "$ref": "#/definitions/model"
         },
         "dateBegin": {
           "type": "string",
@@ -1284,11 +1352,7 @@
       "required": [
         "id",
         "code",
-        "name",
-        "model"
-      ],
-      "x-tags": [
-        "1.0"
+        "name"
       ]
     }
   },
