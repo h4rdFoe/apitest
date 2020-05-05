@@ -1014,6 +1014,17 @@
           "type": "string",
           "format": "date",
           "description": "Дата окончания действия профиля"
+        },
+        "vids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vid": {
+                "$ref": "#/definitions/vid"
+              }
+            }
+          }
         }
       },
       "required": [
@@ -1066,6 +1077,14 @@
         "price": {
           "type": "integer",
           "description": "Цена"
+        },
+        "models": {
+          "type": "object",
+          "properties": {
+            "model": {
+              "$ref": "#/definitions/model"
+            }
+          }
         }
       },
       "required": [
@@ -1110,6 +1129,42 @@
           "type": "string",
           "description": "Дата окончания действия модели",
           "format": "date"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "$ref": "#/definitions/method"
+              }
+            }
+          }
+        },
+        "typeOfTreatments": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "object",
+            "properties": {
+              "typeOfTreatment": {
+                "$ref": "#/definitions/typeOfTreatment"
+              }
+            }
+          }
+        },
+        "mkbs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mkb10": {
+                "$ref": "#/definitions/mkb10"
+              }
+            }
+          }
         }
       },
       "required": [
@@ -1164,6 +1219,7 @@
       "x-tags": [
         "1.0"
       ],
+      "description": "Вид лечения; id:ref_vid_lechen.id; name:ref_vid_lechen.s_name; model:модель model, ref_vid_lechen.id_model; dateBegin:ref_vid_lechen.date_begin; dateEnd:ref_vid_lechen.date_end",
       "properties": {
         "id": {
           "type": "integer",
@@ -1192,8 +1248,7 @@
         "model",
         "dateBegin",
         "dateEnd"
-      ],
-      "description": "Вид лечения; id:ref_vid_lechen.id; name:ref_vid_lechen.s_name; model:модель model, ref_vid_lechen.id_model; dateBegin:ref_vid_lechen.date_begin; dateEnd:ref_vid_lechen.date_end"
+      ]
     },
     "mkb10": {
       "title": "mkb10",
