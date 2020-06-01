@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/profiles/{id}": {
+    "/profiles/{profile_id}": {
       "get": {
         "summary": "Получение профиля",
         "tags": [
@@ -64,10 +64,9 @@
       },
       "parameters": [
         {
-          "name": "id",
+          "type": "string",
+          "name": "profile_id",
           "in": "path",
-          "type": "integer",
-          "description": "Уникальный идентификатор",
           "required": true
         }
       ],
@@ -330,14 +329,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}": {
+    "/profiles/vids/{vid_id}": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "vid_id",
@@ -404,14 +397,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models": {
+    "/profiles/vids/{vid_id}/models": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "vid_id",
@@ -481,20 +468,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}": {
+    "/profiles/vids/models/{model_id}": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "model_id",
@@ -561,20 +536,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/methods": {
+    "/profiles/vids/models/{model_id}/methods": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "model_id",
@@ -644,26 +607,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/methods/{method_id}": {
+    "/profiles/vids/models/methods/{method_id}": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "model_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "method_id",
@@ -730,20 +675,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/typeOfTreatments": {
+    "/profiles/vids/models/{model_id}/typeOfTreatments": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "model_id",
@@ -813,26 +746,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/typeOfTreatments/{type_id}": {
+    "/profiles/vids/models/typeOfTreatments/{type_id}": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "model_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "type_id",
@@ -899,20 +814,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/mkb10": {
+    "/profiles/vids/models/{model_id}/mkb10": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "model_id",
@@ -980,26 +883,8 @@
         ]
       }
     },
-    "/profiles/{profile_id}/vids/{vid_id}/models/{model_id}/mkb10/{mkb_id}": {
+    "/profiles/vids/models/mkb10/{mkb_id}": {
       "parameters": [
-        {
-          "type": "integer",
-          "name": "profile_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "vid_id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "type": "integer",
-          "name": "model_id",
-          "in": "path",
-          "required": true
-        },
         {
           "type": "integer",
           "name": "mkb_id",
@@ -1166,6 +1051,10 @@
               "$ref": "#/definitions/model"
             }
           }
+        },
+        "id_profile": {
+          "type": "integer",
+          "description": "Профиль ВМП"
         }
       },
       "required": [
@@ -1174,7 +1063,8 @@
         "razdel",
         "dateBegin",
         "dateEnd",
-        "price"
+        "price",
+        "id_profile"
       ]
     },
     "model": {
@@ -1242,12 +1132,17 @@
               }
             }
           }
+        },
+        "id_vid": {
+          "type": "integer",
+          "description": "Вид ВМП"
         }
       },
       "required": [
         "name",
         "dateBegin",
-        "dateEnd"
+        "dateEnd",
+        "id_vid"
       ]
     },
     "method": {
@@ -1277,12 +1172,17 @@
         "dateEnd": {
           "type": "string",
           "description": "Дата окончания действия метода"
+        },
+        "id_model": {
+          "type": "integer",
+          "description": "Модель ВМП"
         }
       },
       "required": [
         "name",
         "dateBegin",
-        "dateEnd"
+        "dateEnd",
+        "id_model"
       ]
     },
     "typeOfTreatment": {
@@ -1310,12 +1210,17 @@
           "type": "string",
           "description": "Дата окончания действия вида лечения",
           "format": "date"
+        },
+        "id_model": {
+          "type": "integer",
+          "description": "Модель ВМП"
         }
       },
       "required": [
         "name",
         "dateBegin",
-        "dateEnd"
+        "dateEnd",
+        "id_model"
       ]
     },
     "mkb10": {
@@ -1347,12 +1252,17 @@
           "type": "string",
           "description": "Дата окончания действия заболевания",
           "format": "date"
+        },
+        "id_model": {
+          "type": "integer",
+          "description": "Модель ВМП"
         }
       },
       "required": [
         "id",
         "code",
-        "name"
+        "name",
+        "id_model"
       ]
     }
   },
