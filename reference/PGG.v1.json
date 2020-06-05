@@ -668,145 +668,6 @@
           "1.0"
         ]
       }
-    },
-    "/profiles/vids/models/{model_id}/typeOfTreatments": {
-      "parameters": [
-        {
-          "type": "integer",
-          "name": "model_id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Получение видов лечения",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/typeOfTreatment"
-              }
-            }
-          }
-        },
-        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments",
-        "parameters": [
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateBegin",
-            "description": "Дата начала действия вида лечения",
-            "format": "date"
-          },
-          {
-            "type": "string",
-            "in": "query",
-            "name": "dateEnd",
-            "description": "Дата окончания действия вида лечения",
-            "format": "date"
-          }
-        ],
-        "description": "Получение видов лечения"
-      },
-      "post": {
-        "summary": "Добавление видов лечения",
-        "operationId": "post-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            }
-          }
-        },
-        "description": "Добавление видов лечения",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            },
-            "description": "Валидации при создании записей: 1.Уникальность кода в рамках родителя; 2.Логика формирования кода, описанная в постановке; 3.Идентификатор - автоинкремент"
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      }
-    },
-    "/profiles/vids/models/typeOfTreatments/{type_id}": {
-      "parameters": [
-        {
-          "type": "integer",
-          "name": "type_id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Получение вида лечения",
-        "tags": [
-          "1.0"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            }
-          }
-        },
-        "operationId": "get-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
-        "description": "Получение вида лечения"
-      },
-      "put": {
-        "summary": "Изменение вида лечения",
-        "operationId": "put-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            }
-          }
-        },
-        "description": "Изменение вида лечения",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/typeOfTreatment"
-            },
-            "description": "Валидации при изменении записей: 1.Уникальность кода в рамках родителяж 2.Формат кода ХХХ, Х - цифры от 0 до 9; 3.Нельзя менять идентификатор"
-          }
-        ],
-        "tags": [
-          "1.0"
-        ]
-      },
-      "delete": {
-        "summary": "Удаление вида лечения",
-        "operationId": "delete-profiles-profile_id-vids-vid_id-models-model_id-typeOfTreatments-type_id",
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "null"
-            }
-          }
-        },
-        "description": "Удаление вида лечения",
-        "tags": [
-          "1.0"
-        ]
-      }
     }
   },
   "definitions": {
@@ -966,18 +827,8 @@
           }
         },
         "typeOfTreatments": {
-          "type": [
-            "string",
-            "array"
-          ],
-          "items": {
-            "type": "object",
-            "properties": {
-              "typeOfTreatment": {
-                "$ref": "#/definitions/typeOfTreatment"
-              }
-            }
-          }
+          "type": "string",
+          "description": "Вид лечения"
         },
         "mkbs": {
           "type": "array",
@@ -999,6 +850,7 @@
         "name",
         "dateBegin",
         "dateEnd",
+        "typeOfTreatments",
         "id_vid"
       ]
     },
@@ -1029,44 +881,6 @@
         "dateEnd": {
           "type": "string",
           "description": "Дата окончания действия метода"
-        },
-        "id_model": {
-          "type": "integer",
-          "description": "Модель ВМП"
-        }
-      },
-      "required": [
-        "name",
-        "dateBegin",
-        "dateEnd",
-        "id_model"
-      ]
-    },
-    "typeOfTreatment": {
-      "title": "typeOfTreatment",
-      "type": "object",
-      "x-tags": [
-        "1.0"
-      ],
-      "description": "Вид лечения; id:ref_vid_lechen.id; name:ref_vid_lechen.s_name; model:модель model, ref_vid_lechen.id_model; dateBegin:ref_vid_lechen.date_begin; dateEnd:ref_vid_lechen.date_end",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Уникальный идентификатор"
-        },
-        "name": {
-          "type": "string",
-          "description": "Наименование вида лечения"
-        },
-        "dateBegin": {
-          "type": "string",
-          "description": "Дата начала действия вида лечения",
-          "format": "date"
-        },
-        "dateEnd": {
-          "type": "string",
-          "description": "Дата окончания действия вида лечения",
-          "format": "date"
         },
         "id_model": {
           "type": "integer",
